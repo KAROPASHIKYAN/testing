@@ -203,5 +203,6 @@ add_action('wp_enqueue_scripts', function(){
 			true
 		);
 wp_enqueue_style('quiz',plugins_url( 'css/style.css', __FILE__ ),);
+wp_dequeue_style('wp_dequeue_style');
 });
 

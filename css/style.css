@@ -1,14 +1,16 @@
 body .quiz {
 	margin: 0;
 	color: #000000;
+	text-align: center;
 }
 .quiz {
 	margin: 0 auto;
 	width: 600px;
-.active{
+}	
+.active {
 	display: block;
 }
-.inactive{
+.inactive {
 	display: none;
 }
 
@@ -17,10 +19,9 @@ body .quiz {
 	margin-bottom: 20px;
 	font-size: 20px;
 }
-.quiz-questions-item, .quiz-results-item{
-	&__question{margin-bottom: 20px;
+.quiz-questions-item__question, .quiz-results-item__question{margin-bottom: 20px;
 		font-size: 20px;}
-	&__answers{
+	.quiz-questions-item__answers, .quiz-results-item__answers{
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -32,7 +33,22 @@ body .quiz {
 }
 .btn-restart{
 	display: none;
+	background-color: #4dff03;
+    border-radius: 5px;
+    border: 1px solid;
+    text-align: center;
 }
 .btn-prev{
 	display: none;
+	background-color: #4dff03;
+    border-radius: 5px;
+    border: 1px solid;
+    text-align: center;
+}
+.btn-next{
+	disable;
+	background-color: #4dff03;
+    border-radius: 5px;
+    border: 1px solid;
+    text-align: center;
 }

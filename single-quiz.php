@@ -11,15 +11,15 @@ $quizes = get_field('quizes');
 	<body>
 		<?php if(!empty($quizes)):?>
 			<?php foreach ($quizes as $key => $quiz): ?>
-				<div class="quiz active">
+				<div class="quiz <?php echo $key==0 ? 'active' : 'inactive' ;?>">
 					<div class="quiz-questions">
 						<div class="quiz-questions-item">
 							<div class="quiz-questions-item__question"><p><?php echo $quiz['question']; ?></p></div>
 							<ul class="quiz-questions-item__answers">
-								<?php foreach($quiz['answers'] as $k => $answer):?>
+								<?php foreach($quiz['answers'] as $answer):?>
 								<li>
 									<label>
-										<input type="radio" name="<?php echo ++$key;?>">
+										<input type="radio" name="<?php echo $key; ?>">
 										<?php echo $answer['answer']; ?>
 									</label>
 								</li>
@@ -31,7 +31,7 @@ $quizes = get_field('quizes');
 						<div class="quiz-results-item">
 							<div class="quiz-results-item__question"><?php echo $quiz['question']; ?></div>
 							<ul class="quiz-results-item__answers">
-								<?php foreach($quiz['answers'] as $k => $answer):?>
+								<?php foreach($quiz['answers'] as $answer):?>
 								<li><?php echo $answer['answer']; ?></li>
 								<?php endforeach; ?>
 							</ul>
