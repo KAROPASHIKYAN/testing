@@ -27,7 +27,7 @@ $quizes = get_field('quizes');
 							</ul>
 						</div>
 					</div>
-					<div class="quiz-results">
+					<div class="quiz-results inactive">
 						<div class="quiz-results-item">
 							<div class="quiz-results-item__question"><?php echo $quiz['question']; ?></div>
 							<ul class="quiz-results-item__answers">
@@ -40,7 +40,7 @@ $quizes = get_field('quizes');
 					<div class="quiz-indicator">1/10</div>
 					<div class="quiz-contorls"></div>
 						<button class="btn-prev">Back</button>
-						<button class="btn-next">Next</button>
+						<button class="btn-next" disabled>Next</button>
 						<button class="btn-restart">Restart</button>
 				</div>
 			<?php endforeach; ?>
