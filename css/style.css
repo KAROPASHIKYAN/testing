@@ -1,0 +1,38 @@
+body .quiz {
+	margin: 0;
+	color: #000000;
+}
+.quiz {
+	margin: 0 auto;
+	width: 600px;
+.active{
+	display: block;
+}
+.inactive{
+	display: none;
+}
+
+}
+.quiz-questions, .quiz-indicator, {
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+.quiz-questions-item, .quiz-results-item{
+	&__question{margin-bottom: 20px;
+		font-size: 20px;}
+	&__answers{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+}
+.quiz-indicator{
+
+}
+.btn-restart{
+	display: none;
+}
+.btn-prev{
+	display: none;
+}
