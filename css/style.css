@@ -31,9 +31,10 @@ body .quiz {
 .quiz-indicator{
 
 }
-.btn-restart{
+.btn-again{
 	display: none;
-	background-color: #4dff03;
+	//background-color: #4dff03;
+	background-color: red;
     border-radius: 5px;
     border: 1px solid;
     text-align: center;

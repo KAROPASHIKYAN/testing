@@ -27,26 +27,30 @@ $quizes = get_field('quizes');
 							</ul>
 						</div>
 					</div>
-					<div class="quiz-results inactive">
-						<div class="quiz-results-item">
-							<div class="quiz-results-item__question"><?php echo $quiz['question']; ?></div>
-							<ul class="quiz-results-item__answers">
-								<?php foreach($quiz['answers'] as $answer):?>
-								<li><?php echo $answer['answer']; ?></li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
-					</div>
 					<div class="quiz-indicator">1/10</div>
 					<div class="quiz-contorls"></div>
 						<button class="btn-prev">Back</button>
 						<button class="btn-next" disabled>Next</button>
-						<button class="btn-restart">Restart</button>
+						<button class="btn-again">Restart</button>
+				</div>
+			<?php endforeach; ?>
+		<?php endif; ?>	
+		<?php if(!empty($quizes)):?>
+			<?php foreach ($quizes as $quiz): ?>
+				<div class="quiz-results inactive">
+					<div class="quiz-results-item">
+						<div class="quiz-results-item__question"><?php echo $quiz['question']; ?></div>
+						<ul class="quiz-results-item__answers">
+							<?php foreach($quiz['answers'] as $answer):?>
+								<li><?php echo $answer['answer']; ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 				</div>
 			<?php endforeach; ?>
 		<?php endif; ?>	
 
-
 		<?php wp_footer(); ?>
+		<?php //echo plugins_url( '/css/style.css', __FILE__ ); ?>
 	</body>
 </html>
