@@ -1,21 +1,22 @@
 $(document).ready(function(){
 
-var index = $('body').index();	
+//var index = $('div .quiz').index();	
+
+$('.quiz').each(function(index, value){
+	console.log(index);
+});
 
 $('.active input').on('change', function(){
 	$('.btn-next').removeAttr('disabled');
-	console.log(index);
+	
 });
 	
-$('.btn-next').on('click', function(){
-	$('body').each(function(i){
-		$('.quiz').removeClass('active').addClass('inactive');
-		$('.quiz').eq(index).addClass('active').removeClass('inactive');
-		console.log(index);
 
-	});
 	
+		$('.btn-next').on('click', function(){
+			$('.quiz.active').removeClass('active').addClass('inactive');
+			$('.quiz').eq($(this).parents('.quiz').index() +1).addClass('active').removeClass('inactive');
+		});
+		
 
-
-});
 });
