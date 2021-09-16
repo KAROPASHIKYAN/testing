@@ -40,7 +40,7 @@ body .quiz, .quiz-results {
     text-align: center;
 }
 .btn-prev{
-	display: none;
+	
 	background-color: #4dff03;
     border-radius: 5px;
     border: 1px solid;
