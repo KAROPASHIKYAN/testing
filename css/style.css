@@ -1,9 +1,9 @@
-body .quiz, .quiz-results {
+body .quiz, .quiz-results, .result {
 	margin: 0;
 	color: #000000;
 	text-align: center;
 }
-.quiz {
+.quiz, .quiz-results, .result {
 	margin: 0 auto;
 	width: 600px;
 }	
@@ -31,10 +31,8 @@ body .quiz, .quiz-results {
 .quiz-indicator{
 
 }
-.btn-again, .btn-result{
-	display: none;
-	//background-color: #4dff03;
-	background-color: red;
+.btn-reset, .btn-submit{
+	background-color: #4dff03;
     border-radius: 5px;
     border: 1px solid;
     text-align: center;

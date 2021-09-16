@@ -16,6 +16,7 @@ $('.active input').on('change', function(){
 	
 });
 		//BTN NEXT
+		//START
 $('.btn-next').on('click', function(){
 	$('.quiz.active').removeClass('active').addClass('inactive');
 	$('.quiz').eq($(this).parents('.quiz').index() +1).addClass('active').removeClass('inactive');
@@ -25,7 +26,8 @@ $('.btn-next').on('click', function(){
 			$('.quiz-indicator').text(total + '/' + total);
 	}
 		if(1 + current>total){
-			$('.quiz-results').addClass('active').removeClass('inactive');
+			$('.result').addClass('active').removeClass('inactive');
+			$('.btn-reset').addClass('active').removeClass('inactive');
 		}
 		if(current > 0){
 			$('.btn-prev').addClass('active').removeClass('inactive');
@@ -39,8 +41,10 @@ $('.btn-next').on('click', function(){
 	$('.active input').on('change', function(){
 	$('.btn-next').prop('disabled', false);
 		});
-	});
+	}); //END
+
 //BTN PREV
+//START
 $('.btn-prev').on('click', function(){
 	$('.btn-next').prop('disabled', false);
 	$('.quiz.active').removeClass('active').addClass('inactive');
@@ -50,7 +54,7 @@ $('.btn-prev').on('click', function(){
 			$('.quiz-indicator').text(total + '/' + total);
 	}
 		if(1 + current>total){
-			$('.quiz-results').addClass('active').removeClass('inactive');
+			$('.result').addClass('active').removeClass('inactive');
 		}
 		if(current > 0){
 			$('.btn-prev').addClass('active').removeClass('inactive');
@@ -59,5 +63,5 @@ $('.btn-prev').on('click', function(){
 		}
 
 	});
-	
+	//END
 });
