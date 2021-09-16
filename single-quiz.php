@@ -27,11 +27,12 @@ $quizes = get_field('quizes');
 							</ul>
 						</div>
 					</div>
-					<div class="quiz-indicator">1/10</div>
+					<div class="quiz-indicator"><?php echo ++$key . '/' . (array_key_last($quizes)+1);?></div>
 					<div class="quiz-contorls"></div>
 						<button class="btn-prev">Back</button>
 						<button class="btn-next" disabled>Next</button>
 						<button class="btn-again">Restart</button>
+						<button class="btn-result">Show result</button>
 				</div>
 			<?php endforeach; ?>
 		<?php endif; ?>	
