@@ -9,6 +9,11 @@ $quizes = get_field('quizes');
 		<?php wp_head();?>
 	</head>
 	<body>
+		<?php 
+		/*echo '<pre>';
+		print_r($quizes);
+		echo '</pre>';*/
+		?>
 		<?php if(!empty($quizes)):?>
 			<?php foreach ($quizes as $key => $quiz): ?>
 				<div class="quiz <?php echo $key==0 ? 'active' : 'inactive' ;?>">
@@ -19,7 +24,7 @@ $quizes = get_field('quizes');
 								<?php foreach($quiz['answers'] as $answer):?>
 								<li>
 									<label>
-										<input type="radio" name="<?php echo $key; ?>">
+										<input type="radio" name="<?php echo $key; ?>" value="<?php echo $answer['answer']; ?>">
 										<?php echo $answer['answer']; ?>
 									</label>
 								</li>
@@ -37,7 +42,7 @@ $quizes = get_field('quizes');
 		<?php endif; ?>	
 		<div class="result inactive">
 			<button class="btn-reset">Restart</button>
-			<button class="btn-submit">Submit</button>	
+			<!--<button class="btn-submit">Submit</button>-->	
 			<?php if(!empty($quizes)):?>
 				<?php foreach ($quizes as $quiz): ?>
 					<div class="quiz-results">
