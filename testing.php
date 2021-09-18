@@ -23,13 +23,17 @@ function myplugin_setup_post_type(){
 	register_post_type('quiz', $args);
 }
 
-add_filter( 'template_include', 'my_template' );
-function my_template($template){
+add_filter('single_template', 'my_single_template');
+function my_single_template($single) {
 
 	global $post;
-	if( $post->post_type == 'quiz' ){
-		return wp_normalize_path( WP_PLUGIN_DIR ) . '/testing/single-quiz.php';
+
+	if ( $post->post_type == 'quiz' ) {
+		$tpl = plugin_dir_path(__FILE__). 'single-quiz.php';
+		return wp_normalize_path($tpl);
 	}
+
+	return $single;
 }
 
 
@@ -168,7 +172,7 @@ endif;
 }	
 //ACF end
 
-register_activation_hook( __FILE__, 'myplugin_install' ); 
+//register_activation_hook( __FILE__, 'myplugin_install' );
 function myplugin_install(){
 	// Запускаем функцию регистрации типа записи
 	myplugin_setup_post_type();
@@ -193,11 +197,14 @@ function myplugin_deactivation() {
 	// Сбрасываем настройки ЧПУ, чтобы они пересоздались с новыми данными
 	flush_rewrite_rules();
 }
-add_action('wp_enqueue_scripts', function(){
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('quiz', plugins_url( 'js/script.js', __FILE__ ),array( 'jquery' ), null, true);
-	wp_enqueue_style('quiz',plugins_url( 'css/style.css', __FILE__ ));
-	wp_dequeue_style('app');
-	wp_dequeue_script('app');
-});
+
+	add_action('wp_enqueue_scripts', function(){
+		wp_deregister_script('jquery');
+		wp_register_script('jquery', plugins_url( 'js/jquery-3.6.0.min.js', __FILE__ ),array(), null, true );
+		wp_enqueue_script('jquery');
+		wp_enqueue_script('quiz', plugins_url( 'js/script.js', __FILE__ ),array( 'jquery' ), null, true);
+		wp_enqueue_style('quiz', plugins_url( 'css/style.css', __FILE__ ));
+		wp_dequeue_style('app');
+		wp_dequeue_script('app');
+	});
 

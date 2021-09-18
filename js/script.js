@@ -36,11 +36,12 @@ $('.btn-next').on('click', function(){
 			$('.btn-reset').addClass('active').removeClass('inactive');
 			
 		$('.quiz').each(function(index){
-					console.log($('input:checked').eq(index).val() + $('input:checked').index());
-					console.log(index);
-					$('input').each(function(index){
-						//console.log($('input:checked').val());
-					});	
+					//console.log($('input:checked').eq(index).val() );
+					//console.log($('input:checked').index(($('input').eq(index))));
+					$('input').each(function(index, element){
+						console.log($('input:checked').index());
+						console.log($('input:checked').);
+					});
 				});
 
 			
