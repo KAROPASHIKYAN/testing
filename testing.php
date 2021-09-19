@@ -172,16 +172,6 @@ endif;
 }	
 //ACF end
 
-//register_activation_hook( __FILE__, 'myplugin_install' );
-function myplugin_install(){
-	// Запускаем функцию регистрации типа записи
-	myplugin_setup_post_type();
-	acf_quiz();
-	my_template();
-
-	// Сбрасываем настройки ЧПУ, чтобы они пересоздались с новыми данными
-	flush_rewrite_rules();
-}
 
 
 
@@ -190,15 +180,11 @@ function myplugin_install(){
 
 
 
-register_deactivation_hook( __FILE__, 'myplugin_deactivation' );
-function myplugin_deactivation() {
-	// Тип записи не регистрируется, а значит он автоматически удаляется - его не нужно удалять как-то еще.
 
-	// Сбрасываем настройки ЧПУ, чтобы они пересоздались с новыми данными
-	flush_rewrite_rules();
-}
 
-	add_action('wp_enqueue_scripts', function(){
+
+	add_action('wp_enqueue_scripts', 'my_assets' );
+	function my_assets(){
 		wp_deregister_script('jquery');
 		wp_register_script('jquery', plugins_url( 'js/jquery-3.6.0.min.js', __FILE__ ),array(), null, true );
 		wp_enqueue_script('jquery');
@@ -206,5 +192,5 @@ function myplugin_deactivation() {
 		wp_enqueue_style('quiz', plugins_url( 'css/style.css', __FILE__ ));
 		wp_dequeue_style('app');
 		wp_dequeue_script('app');
-	});
+	}
 

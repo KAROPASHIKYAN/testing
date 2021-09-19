@@ -3,7 +3,7 @@ $(document).ready(function(){
 var current = $('.quiz').index(),
 	answer = $('input').index(),
     total = $('.quiz').length,	
-	result = [];
+	quizesArr = [];
 
 
 
@@ -35,16 +35,21 @@ $('.btn-next').on('click', function(){
 			$('.result').addClass('active').removeClass('inactive');
 			$('.btn-reset').addClass('active').removeClass('inactive');
 			
-		$('.quiz').each(function(index){
-					//console.log($('input:checked').eq(index).val() );
-					//console.log($('input:checked').index(($('input').eq(index))));
-					$('input').each(function(index, element){
-						console.log($('input:checked').index());
-						console.log($('input:checked').);
-					});
-				});
+		$('.quiz ul').each(function(index){
+					var id = index;
+					var val = $('input:checked').eq(index).val();
+					var quize = {
+						'id': id,
+						'val': val
+					};
+					var quizesStr = {'quize' : quize};
+					quizesArr.push(quizesStr);
 
-			
+			//console.log($('input:checked').eq(index).val() );
+					console.log(index);
+					console.log(val);
+		});
+				console.log(quizesArr);
 
 		}
 		if(current > 0){
