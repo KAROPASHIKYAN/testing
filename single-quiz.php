@@ -1,5 +1,9 @@
 <?php
 $quizes = get_field('quizes');
+//echo '<pre>';
+//print_r($quizes);
+//echo '</pre>';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,10 +25,10 @@ $quizes = get_field('quizes');
 						<div class="quiz-questions-item">
 							<div class="quiz-questions-item__question"><p><?php echo $quiz['question']; ?></p></div>
 							<ul class="quiz-questions-item__answers">
-								<?php foreach($quiz['answers'] as $answer):?>
+								<?php foreach($quiz['answers'] as $value => $answer):?>
 								<li>
 									<label>
-										<input type="radio" name="<?php echo $key; ?>" value="<?php echo $answer['answer']; ?>">
+										<input type="radio" name="<?php echo $key; ?>" value="<?php echo $value; ?>">
 										<?php echo $answer['answer']; ?>
 									</label>
 								</li>

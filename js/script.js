@@ -3,8 +3,8 @@ $(document).ready(function(){
 var current = $('.quiz').index(),
 	answer = $('input').index(),
     total = $('.quiz').length,	
-	quizesArr = [];
-
+	quizeArr = {'action': 'quizes'};
+	//action = {'action': 'quizes'};
 
 
 
@@ -37,19 +37,32 @@ $('.btn-next').on('click', function(){
 			
 		$('.quiz ul').each(function(index){
 					var id = index;
-					var val = $('input:checked').eq(index).val();
+					var val = $('li input:checked').eq(index).val();
 					var quize = {
 						'id': id,
 						'val': val
 					};
-					var quizesStr = {'quize' : quize};
-					quizesArr.push(quizesStr);
+					//var quizeStr = {'question' : quize};
+					let addProp = (obj, propName, propValue) => {
+						obj[propName] = propValue;
+											
+					};
+					addProp(quizeArr, id, val);
+					//quizeArr.push(quizeStr);
+					//$.extend(true, quizeArr, quizeStr);
+
 
 			//console.log($('input:checked').eq(index).val() );
 					console.log(index);
 					console.log(val);
 		});
-				console.log(quizesArr);
+				console.log(quizeArr);
+				console.log(jQuery.isPlainObject( quizeArr));
+				var data = quizeArr;
+				jQuery.get(my_plugin.ajaxurl, data, function(response){
+
+					alert(response);
+				});
 
 		}
 		if(current > 0){
