@@ -1,9 +1,5 @@
 <?php
 $quizes = get_field('quizes');
-//echo '<pre>';
-//print_r($quizes);
-//echo '</pre>';
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,9 +10,9 @@ $quizes = get_field('quizes');
 	</head>
 	<body>
 		<?php 
-		/*echo '<pre>';
-		print_r($quizes);
-		echo '</pre>';*/
+		//echo '<pre>';
+		//print_r($quizes);
+		//echo '</pre>';
 		?>
 		<?php if(!empty($quizes)):?>
 			<?php foreach ($quizes as $key => $quiz): ?>
