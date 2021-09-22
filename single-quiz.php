@@ -1,5 +1,9 @@
 <?php
 $quizes = get_field('quizes');
+global $post;
+$post_id = $post->ID;
+$acf = get_fields($post_id);
+$quizes = $acf['quizes'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,14 +13,13 @@ $quizes = get_field('quizes');
 		<?php wp_head();?>
 	</head>
 	<body>
-		<?php 
-		//echo '<pre>';
-		//print_r($quizes);
-		//echo '</pre>';
-		?>
+
 		<?php if(!empty($quizes)):?>
-			<?php foreach ($quizes as $key => $quiz): ?>
-				<div class="quiz <?php echo $key==0 ? 'active' : 'inactive' ;?>">
+			<form id="quizes" method="post" action="">
+				<input type="hidden" name="action" value="wl_quizes">
+				<input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+				<?php foreach ($quizes as $key => $quiz): ?>
+				<div class="quiz <?php echo $key == 0 ? 'active' : 'inactive' ;?>">
 					<div class="quiz-questions">
 						<div class="quiz-questions-item">
 							<div class="quiz-questions-item__question"><p><?php echo $quiz['question']; ?></p></div>
@@ -32,31 +35,21 @@ $quizes = get_field('quizes');
 							</ul>
 						</div>
 					</div>
-					<div class="quiz-indicator"><?php echo ++$key . '/' . (array_key_last($quizes)+1);?></div>
+					<div class="quiz-indicator"><span class="current"><?php echo ++$key?></span><?php echo '/' . (array_key_last($quizes)+1);?></div>
 					<div class="quiz-contorls"></div>
-						<button class="btn-prev inactive">Back</button>
-						<button class="btn-next" disabled>Next</button>
-					
+						<span class="btn-prev inactive">Back</span>
+						<?php if ($key < count($quizes)): ?>
+							<span class="btn-next disabled" disabled>Next</span>
+						<?php else: ?>
+							<button class="btn-next disabled" type="submit">Submit</button>
+								
+						<?php endif; ?>
 				</div>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
+			</form>
 		<?php endif; ?>	
 		<div class="result inactive">
-			<button class="btn-reset">Restart</button>
-			<!--<button class="btn-submit">Submit</button>-->	
-			<?php if(!empty($quizes)):?>
-				<?php foreach ($quizes as $quiz): ?>
-					<div class="quiz-results">
-						<div class="quiz-results-item">
-							<div class="quiz-results-item__question"><?php echo $quiz['question']; ?></div>
-							<ul class="quiz-results-item__answers">
-								<?php foreach($quiz['answers'] as $answer):?>
-									<li><?php echo $answer['answer']; ?></li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
-					</div>
-				<?php endforeach; ?>
-			<?php endif; ?>
+			<span class="btn-reset">Restart</span>
 		</div>		
 		<?php wp_footer(); ?>
 	</body>

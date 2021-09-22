@@ -179,34 +179,37 @@ function my_assets(){
 	wp_deregister_script('jquery');
 	wp_register_script('jquery', plugins_url( 'js/jquery-3.6.0.min.js', __FILE__ ),array(), null, true );
 	wp_enqueue_script('jquery');
-	wp_enqueue_script('quiz', plugins_url( 'js/script.js', __FILE__ ),array( 'jquery' ), null, true);
+	wp_enqueue_script('ajaxHandle', plugins_url( 'js/script.js', __FILE__ ),array( 'jquery' ), null, true);
 	wp_enqueue_style('quiz', plugins_url( 'css/style.css', __FILE__ ));
-	wp_dequeue_style('app');
-	wp_dequeue_script('app');
-	wp_localize_script('quiz', 'my_plugin', array(
-		'ajaxurl' => admin_url('admin-ajax.php'),
-	));
+	wp_localize_script( 
+    'ajaxHandle', 	
+    'ajax_object', 
+    array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) 
+  );
 }
-add_action('wp_ajax_quizes', 'quizes');
-add_action('wp_ajax_nopriv_quizes', 'quizes');
+add_action('wp_ajax_wl_quizes', 'wl_quizes');
+add_action('wp_ajax_nopriv_wl_quizes', 'wl_quizes');
 
-function quizes(){
-	$post_id = $post->ID;
-	$acf_fields = get_fields($post_id);
-	$quizes = $acf_fields['quizes'];
-	//$quizes = get_field('quizes');
-	$result = [];
+function wl_quizes(){
+	
 	$data = $_POST['data'];
-	if(!empty($quizes)):
-		foreach($quizes as $key => $question):
-			foreach($question['answers'] as $a_key=>$answer):
-				array_push($result, [
-					'question_id' => $key,
-					 'answer_id' => $a_key == $data[$key]['answer_id'] ? $a_key : '',
-					  'correct' => $answer['correct'] ==1 ? $a_key : ''
-					]); 
-			endforeach;
+
+	$post_id = sanitize_text_field( $_POST['post_id'] );
+	
+	
+	$quizes = get_field('quizes', $post_id);
+	$result = [];
+	foreach ($quizes as $key => $question):
+		foreach ($question['answers'] as $a_key => $answer):
+				//$result[$key] = [$answer];
+			if ( $answer['correct'] == 1) {
+				$result[$key] = [$a_key];
+			}
 		endforeach;
-	endif;
+	endforeach;
+
+
+
 	exit(json_encode($result));
+	
 }

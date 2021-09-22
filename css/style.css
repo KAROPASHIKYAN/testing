@@ -31,11 +31,12 @@ body .quiz, .quiz-results, .result {
 .quiz-indicator{
 
 }
-.btn-reset, .btn-submit{
+.btn-reset{
 	background-color: #4dff03;
     border-radius: 5px;
     border: 1px solid;
     text-align: center;
+    cursor: pointer;
 }
 .btn-prev{
 	
@@ -43,6 +44,7 @@ body .quiz, .quiz-results, .result {
     border-radius: 5px;
     border: 1px solid;
     text-align: center;
+    cursor: pointer;
 }
 .btn-next{
 	
@@ -50,4 +52,9 @@ body .quiz, .quiz-results, .result {
     border-radius: 5px;
     border: 1px solid;
     text-align: center;
+    cursor: pointer;
+}
+.disabled{
+	pointer-events: none;
+	background-color: #36ffdd70;
 }
