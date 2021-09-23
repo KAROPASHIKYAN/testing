@@ -13,11 +13,17 @@ $quizes = $acf['quizes'];
 		<?php wp_head();?>
 	</head>
 	<body>
+<!-- //TODO if $_GET['quiz_result']  -->
 
+<!-- //TODO elseif GET ?restart  -->
+
+<!-- else -->
 		<?php if(!empty($quizes)):?>
 			<form id="quizes" method="post" action="">
 				<input type="hidden" name="action" value="wl_quizes">
 				<input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+				<input type="hidden" name="count" value="<?php echo count($quizes); ?>">
+				
 				<?php foreach ($quizes as $key => $quiz): ?>
 				<div class="quiz <?php echo $key == 0 ? 'active' : 'inactive' ;?>">
 					<div class="quiz-questions">
@@ -27,7 +33,7 @@ $quizes = $acf['quizes'];
 								<?php foreach($quiz['answers'] as $value => $answer):?>
 								<li>
 									<label>
-										<input type="radio" name="<?php echo $key; ?>" value="<?php echo $value; ?>">
+										<input type="radio" name="q<?php echo $key+1; ?>" value="<?php echo $value; ?>">
 										<?php echo $answer['answer']; ?>
 									</label>
 								</li>
@@ -48,6 +54,7 @@ $quizes = $acf['quizes'];
 				<?php endforeach; ?>
 			</form>
 		<?php endif; ?>	
+<!-- endif -->
 		<div class="result inactive">
 			<span class="btn-reset">Restart</span>
 		</div>		

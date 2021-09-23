@@ -53,9 +53,13 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(data) {
-                
+                var data = JSON.parse(data);
+
                 console.log(data);
-                    
+                if(data.pass == true){
+                    console.log('IT WORKS')
+                    window.location.replace("/?quiz_result="+data.result_post_id);
+                }    
             }
         });
          event.preventDefault();
