@@ -7,7 +7,6 @@ $(document).ready(function() {
             'data': []
         };
 
-
     $('.active input').on('change', function() {
         $('.btn-next').removeClass('disabled');
     });
@@ -57,8 +56,11 @@ $(document).ready(function() {
 
                 console.log(data);
                 if(data.pass == true){
-                    console.log('IT WORKS')
-                    window.location.replace("/?quiz_result="+data.result_post_id);
+                    
+                    //window.location.replace("/?quiz_result="+data.result_post_id);
+                    window.location = window.location.href + "?wl_result="+data.result_post_id;
+                    
+
                 }    
             }
         });

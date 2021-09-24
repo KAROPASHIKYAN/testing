@@ -1,9 +1,13 @@
 <?php
-$quizes = get_field('quizes');
+
 global $post;
 $post_id = $post->ID;
-$acf = get_fields($post_id);
-$quizes = $acf['quizes'];
+$acf_drochepilovo = get_fields($post_id);
+$quizes = $acf_drochepilovo['quizes'];
+$result_post_type = get_post_type( $_GET['wl_result'] );
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,11 +23,11 @@ $quizes = $acf['quizes'];
 
 <!-- else -->
 		<?php if(!empty($quizes)):?>
-			<form id="quizes" method="post" action="">
+			<form id="quizes" method="post" action="" class="<?php echo empty($_GET['wl_result']) ? 'active': 'inactive'; ?>">
 				<input type="hidden" name="action" value="wl_quizes">
 				<input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
 				<input type="hidden" name="count" value="<?php echo count($quizes); ?>">
-				
+
 				<?php foreach ($quizes as $key => $quiz): ?>
 				<div class="quiz <?php echo $key == 0 ? 'active' : 'inactive' ;?>">
 					<div class="quiz-questions">
@@ -53,8 +57,38 @@ $quizes = $acf['quizes'];
 				</div>
 				<?php endforeach; ?>
 			</form>
-		<?php endif; ?>	
-<!-- endif -->
+		<?php endif; ?>
+		<?php
+		 if (!empty($_GET['wl_result'])): 
+			$result_post_id = $_GET['wl_result'];
+			$acf_field = get_fields(intval($result_post_id));
+			$results = $acf_field['results'];
+			//var_dump($acf_field);
+			?>
+			<?php foreach ($quizes as $key => $quiz): ?>
+					<div class="quiz-results">
+						<div class="quiz-questions">
+							<div class="quiz-questions-item">
+								<div class="quiz-questions-item__question"><p><?php echo $quiz['question']; ?></p></div>
+								<ul class="quiz-questions-item__answers">
+									<?php foreach($quiz['answers'] as $value => $answer):?>
+									<li>
+										<p class="<?php if ($results[$value]['answer'] == ($answer['correct']==1 ? $value : '')): ?>
+										<?php echo 'correct'; ?>
+										<?php elseif ($results[$value]['answer'] == ($answer['correct']!==1 ? $value : '')):?>
+										<?php echo 'incorrect'; ?>
+										<?php endif; ?>">
+											<?php echo $answer['answer']; ?>
+										</p>	
+									</li>
+								<?php endforeach; ?>
+								</ul>
+							</div>
+						</div>
+			<?php endforeach; ?>
+		<?php endif; ?>
+			
+		</div>
 		<div class="result inactive">
 			<span class="btn-reset">Restart</span>
 		</div>		

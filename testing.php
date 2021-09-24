@@ -346,7 +346,7 @@ function get_the_user_ip() {
  }
  //AJAX
 function wl_quizes(){
-	global $post;
+	
 	$data = $_POST;
 
 	$post_id = sanitize_text_field( $data['post_id'] );
@@ -381,7 +381,7 @@ function wl_quizes(){
 	//Count correct answers in %
 	$results_percent = intval(($compare / $length)*100);
 
-	$test_return['question'] = $quizes;
+	$test_return['$question'] = $quizes;
 	$test_return['data'] = $data;
 	$test_return['length'] = $length;
 	$test_return['answer'] = $ans;
@@ -400,8 +400,7 @@ function wl_quizes(){
 	$new_post = array(                                                 
 	'post_title'     => $new_post_title,                                                   
 	'post_type'      => 'quiz_result',
-	'post_status'   => 'publish'
-
+	'post_status'    => 'publish'
 	);
 	$result_post_id = wp_insert_post($new_post);
 	//TODO create post+
@@ -417,7 +416,7 @@ function wl_quizes(){
 
 
 
- 	$arr[] = [];
+ $arr[] = [];
 	foreach ($ans as $key => $answer):
 		$field_key = "field_614c3fc5ba070";
 		$values[$key]['question'] = $key;  
@@ -431,6 +430,8 @@ function wl_quizes(){
 
 	if ($results_percent >= 80):
 		$test_return['pass'] = true;
+	else:
+		$test_return['fail'] = true;
 	endif;
 	//TODO проверить если ответов больше 80%:
 
