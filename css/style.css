@@ -1,19 +1,27 @@
+body.single-quiz{
+	color: #000;
+}
 body .quiz, .quiz-results, .result {
-	margin: 0;
 	color: #000000;
 	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
-.quiz, .quiz-results, .result {
-	margin: 0 auto;
-	width: 600px;
-}	
-.active {
-	display: block;
-}
-.inactive {
+.quiz{
 	display: none;
 }
+.quiz, .quiz-results, .result {
+	margin-left: auto;
 
+	margin-right: auto;
+	width: 600px;
+}	
+.quiz.active {
+	display: block;
+}
+.d-none,
+.inactive {
+	display: none;
 }
 .quiz-questions, .quiz-indicator, {
 	margin-bottom: 20px;
@@ -57,4 +65,16 @@ body .quiz, .quiz-results, .result {
 .disabled{
 	pointer-events: none;
 	background-color: #36ffdd70;
+}
+.correct{
+	background-color: #4dff03;
+}
+.incorrect{
+	background-color: #fc0303;
+}
+
+.quiz-contorls{
+	display: flex;
+	justify: space-between;
+
 }

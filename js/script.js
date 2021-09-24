@@ -7,38 +7,42 @@ $(document).ready(function() {
             'data': []
         };
 
+
     $('.active input').on('change', function() {
         $('.btn-next').removeClass('disabled');
+
     });
     //BTN NEXT
     //START
     $('.btn-next').on('click', function() {
 
-       	var parent = $(this).parents('.quiz');
-        $(parent).removeClass('active').addClass('inactive');
-        $(parent).next().addClass('active').removeClass('inactive');
-        console.log($(parent).next());
-        $('.quiz-indicator .current').text(++current);
-        
-        if (current > total) {
-            $('.result').addClass('active').removeClass('inactive');
-            $('.btn-reset').addClass('active').removeClass('inactive');
-            var str = $("form").serialize();
+       	var quizActive = $('.quiz.active');
+        if (quizActive.next().hasClass('quiz')){
+            quizActive.toggleClass('active').next().toggleClass('active');
+            $('.btn-prev').removeClass('inactive').addClass('active');
+            $('.btn-next').addClass('disabled');
         }
-        if (current > 0) {
-            $('.btn-prev').addClass('active').removeClass('inactive');
-        } else {
-            $('.btn-prev').addClass('inactive').removeClass('active');
+        if ((quizActive.next().next().hasClass('quiz')) === false ){
+                    $(this).addClass('inactive');
+                    $("button").removeClass('d-none');
         }
-        if ($('.active input').prop('checked')) {
-            $('.btn-next').removeClass('disabled');
+        if (quizActive.next().find('input:checked') == true){
+                $('.btn-next').removeClass('disabled');
         }
+        if (quizActive.find('input:checked') == true){
+                $('.btn-next').removeClass('disabled');
+        }
+        console.log(quizActive.next().next().hasClass('quiz'));
 
-        $('.btn-next').addClass('disabled');
-        $('.active input').on('change', function() {
-            $('.btn-next').removeClass('disabled');
-        });
-    }); //END
+
+
+
+
+
+
+        }); //END
+
+    //AJAX
     $('#quizes').submit(function(event) {
         $('.result').addClass('active').removeClass('inactive');
         $('.btn-reset').addClass('active').removeClass('inactive');
@@ -59,9 +63,13 @@ $(document).ready(function() {
                     
                     //window.location.replace("/?quiz_result="+data.result_post_id);
                     window.location = window.location.href + "?wl_result="+data.result_post_id;
-                    
+   
+                }
+                if(data.fail == true){
+                    window.location = window.location.href + "?restart=1&wl_result="+data.result_post_id;
+                    $('.quiz .active').hide();
 
-                }    
+                }   
             }
         });
          event.preventDefault();
@@ -70,20 +78,26 @@ $(document).ready(function() {
     //BTN PREV
     //START
     $('.btn-prev').on('click', function() {
-        var parent = $(this).parents('.quiz');
-        $('.btn-next').removeClass('disabled');
-        $(parent).removeClass('active').addClass('inactive');
-        $(parent).prev().addClass('active').removeClass('inactive');
-        $('.quiz-indicator .current').text(--current);
-        
-        if (current > total) {
-            $('.result').addClass('active').removeClass('inactive');
+       
+        var quizActive = $('.quiz.active');
+        if (quizActive.prev().hasClass('quiz')){
+            quizActive.toggleClass('active').prev().toggleClass('active');
+            $('.btn-prev').removeClass('inactive').addClass('active');
+            $('.btn-next').addClass('disabled');
         }
-        if (current > 0) {
-            $('.btn-prev').addClass('active').removeClass('inactive');
-        } else {
-            $('.btn-prev').addClass('inactive').removeClass('active')
+        if ((quizActive.prev().prev().hasClass('quiz')) === false ){
+                $(this).addClass('inactive');
+                    
         }
+        if ((quizActive.last().hasClass('active')) == false){
+                $('button').addClass('d-none');
+                $('span.btn-next').addClass('active').removeClass('inactive');
+        }
+        if (quizActive.prev().find('input:checked') == true){
+                $('.btn-next').removeClass('disabled');
+        }
+
+        console.log(quizActive.prev().prev().hasClass('quiz'));
 
     });
     //END

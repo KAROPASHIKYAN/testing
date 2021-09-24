@@ -430,12 +430,12 @@ function wl_quizes(){
 
 	if ($results_percent >= 80):
 		$test_return['pass'] = true;
-	else:
+	elseif($results_percent < 80):
 		$test_return['fail'] = true;
 	endif;
 	//TODO проверить если ответов больше 80%:
 
-	//TODO redirect to $_GET ?quiz_result=result_id
+	//TODO redirect to $_GET ?quiz_result=result_id+
 	
 	//TODO  если меньше 80%
 	//TODO redirect to $_GET ?restart
