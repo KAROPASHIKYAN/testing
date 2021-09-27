@@ -12,7 +12,7 @@ $quizes = $acf_fields['quizes'];
 		<title><?php the_title();?></title>
 		<?php wp_head();?>
 	</head>
-	<body <?php echo body_class() ?>>
+	<body <?php echo body_class(); ?>>
 <!-- //TODO if $_GET['quiz_result']  -->
 
 <!-- //TODO elseif GET ?restart  -->
@@ -80,7 +80,7 @@ $quizes = $acf_fields['quizes'];
 									<?php foreach($quiz['answers'] as $value => $answer):?>
 									<li>
 										<label>
-											<input type="radio" name="q<?php echo $key+1; ?>" value="<?php echo $value; ?>">
+											<input type="radio" name="q<?php echo $key; ?>" value="<?php echo $value; ?>">
 											<?php echo $answer['answer']; ?>
 										</label>
 									</li>
@@ -91,11 +91,11 @@ $quizes = $acf_fields['quizes'];
 					</div>
 					<?php endforeach; ?>
 						
-						<div class="quiz-contorls">
-							<span class="btn-prev inactive">Back</span>
-								<span class="btn-next disabled" disabled>Next</span>
-								<button class="btn-next d-none disabled" type="submit">Submit</button>
-						</div>
+					<div class="quiz-contorls">
+						<span class="btn-prev inactive">Back</span>
+						<span class="btn-next disabled" disabled>Next</span>
+						<button class="btn-next d-none disabled" type="submit">Submit</button>
+					</div>
 				</form>
 			<?php endif; ?>	
 		<?php endif; ?>	

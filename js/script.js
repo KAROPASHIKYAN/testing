@@ -20,19 +20,27 @@ $(document).ready(function() {
         if (quizActive.next().hasClass('quiz')){
             quizActive.toggleClass('active').next().toggleClass('active');
             $('.btn-prev').removeClass('inactive').addClass('active');
-            $('.btn-next').addClass('disabled');
+            //$('.btn-next').addClass('disabled');
+            if (quizActive.next().find('input').is(':checked') === true){
+                console.log(quizActive.next().find('input').is(':checked'));
+                $('.btn-next').removeClass('disabled');
+            }
+            else {
+                console.log(quizActive.next().find('input').is(':checked'));
+                $('.btn-next').addClass('disabled');
+            }
         }
         if ((quizActive.next().next().hasClass('quiz')) === false ){
                     $(this).addClass('inactive');
                     $("button").removeClass('d-none');
         }
-        if (quizActive.next().find('input:checked') == true){
-                $('.btn-next').removeClass('disabled');
-        }
-        if (quizActive.find('input:checked') == true){
-                $('.btn-next').removeClass('disabled');
-        }
-        console.log(quizActive.next().next().hasClass('quiz'));
+        //if (quizActive.next().find('input:checked') == true){
+                //$('.btn-next').removeClass('disabled');
+        //}
+        //if (quizActive.find('input:checked') == true){
+         //       $('.btn-next').removeClass('disabled');
+        //}
+        //console.log(quizActive.next().next().hasClass('quiz'));
 
 
 
@@ -59,13 +67,14 @@ $(document).ready(function() {
                 var data = JSON.parse(data);
 
                 console.log(data);
-                if(data.pass == true){
+                if(data.pass === true){
                     
                     //window.location.replace("/?quiz_result="+data.result_post_id);
                     window.location = window.location.href + "?wl_result="+data.result_post_id;
+                    $('.quiz .active').hide();
    
                 }
-                if(data.fail == true){
+                if(data.fail ===true){
                     window.location = window.location.href + "?restart=1&wl_result="+data.result_post_id;
                     $('.quiz .active').hide();
 
@@ -83,7 +92,15 @@ $(document).ready(function() {
         if (quizActive.prev().hasClass('quiz')){
             quizActive.toggleClass('active').prev().toggleClass('active');
             $('.btn-prev').removeClass('inactive').addClass('active');
-            $('.btn-next').addClass('disabled');
+            //$('.btn-next').addClass('disabled');
+            if (quizActive.prev().find('input').is(':checked') === true){
+                console.log(quizActive.prev().find('input').is(':checked'));
+                $('.btn-next').removeClass('disabled');
+            }
+            else {
+                console.log(quizActive.prev().find('input').is(':checked'));
+                $('.btn-next').addClass('disabled');
+            }
         }
         if ((quizActive.prev().prev().hasClass('quiz')) === false ){
                 $(this).addClass('inactive');
@@ -93,7 +110,7 @@ $(document).ready(function() {
                 $('button').addClass('d-none');
                 $('span.btn-next').addClass('active').removeClass('inactive');
         }
-        if (quizActive.prev().find('input:checked') == true){
+        if (quizActive.prev().find('input').is(':checked') == true){
                 $('.btn-next').removeClass('disabled');
         }
 
@@ -101,4 +118,11 @@ $(document).ready(function() {
 
     });
     //END
+
+    //RESET
+    $('.btn-reset').on("click", function(){
+       console.log(window.location); 
+       window.location = window.location.origin + window.location.pathname;
+       console.log(window.location); 
+    });
 });

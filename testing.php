@@ -381,7 +381,7 @@ function wl_quizes(){
 	//Count correct answers in %
 	$results_percent = intval(($compare / $length)*100);
 
-	$test_return['$question'] = $quizes;
+	$test_return['question'] = $quizes;
 	$test_return['data'] = $data;
 	$test_return['length'] = $length;
 	$test_return['answer'] = $ans;
@@ -437,10 +437,10 @@ function wl_quizes(){
 
 	//TODO redirect to $_GET ?quiz_result=result_id+
 	
-	//TODO  если меньше 80%
-	//TODO redirect to $_GET ?restart
+	//TODO  если меньше 80%+
+	//TODO redirect to $_GET ?restart+
 
 
 	exit(json_encode($test_return));
 	
-}
+} 
