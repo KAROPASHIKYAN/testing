@@ -19,11 +19,14 @@ $quizes = $acf_fields['quizes'];
 
 <!-- else -->
 
+
+
 		
 		
 		
 		<?php
 		 if (!empty($_GET['wl_result'])): 
+		 	
 			$result_post_id = $_GET['wl_result'];
 			$acf_result_field = get_fields(intval($result_post_id));
 			$results = $acf_result_field['results'];

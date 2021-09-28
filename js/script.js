@@ -66,15 +66,15 @@ $(document).ready(function() {
             success: function(data) {
                 var data = JSON.parse(data);
 
-                console.log(data);
+                // console.log(data);
                 if(data.pass === true){
-                    
-                    //window.location.replace("/?quiz_result="+data.result_post_id);
+                    console.log(data.file);
+                    window.location.replace("/?quiz_result="+data.result_post_id);
                     window.location = window.location.href + "?wl_result="+data.result_post_id;
                     $('.quiz .active').hide();
    
                 }
-                if(data.fail ===true){
+                if(data.fail === true){
                     window.location = window.location.href + "?restart=1&wl_result="+data.result_post_id;
                     $('.quiz .active').hide();
 

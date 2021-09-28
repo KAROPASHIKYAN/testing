@@ -5,6 +5,8 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 //creation of post types
+
+require plugin_dir_path(__FILE__) . '/include/pdfcreate.php';
 add_action( 'init', 'myplugin_setup_post_type' );
 function myplugin_setup_post_type(){
 	
@@ -230,6 +232,46 @@ function acf_quiz(){
 						'translations' => 'translate',
 					),
 					array(
+						'key' => 'field_614c3e83cb56e',
+						'label' => 'Registration number',
+						'name' => 'registration_number',
+						'type' => 'text',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'default_value' => '',
+						'placeholder' => '',
+						'prepend' => '',
+						'append' => '',
+						'maxlength' => '',
+						'translations' => 'translate',
+					),
+					array(
+						'key' => 'field_614c3b55ba06e',
+						'label' => 'PDF certificate',
+						'name' => 'pdf_certificate',
+						'type' => 'url',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'default_value' => '',
+						'placeholder' => '',
+						'prepend' => '',
+						'append' => '',
+						'maxlength' => '',
+						'translations' => 'translate',
+					),
+					array(
 						'key' => 'field_614c3fc5ba070',
 						'label' => 'Q&A',
 						'name' => 'results',
@@ -416,7 +458,7 @@ function wl_quizes(){
 
 
 
- $arr[] = [];
+ 	$arr[] = [];
 	foreach ($ans as $key => $answer):
 		$field_key = "field_614c3fc5ba070";
 		$values[$key]['question'] = $key;  
@@ -430,6 +472,18 @@ function wl_quizes(){
 
 	if ($results_percent >= 80):
 		$test_return['pass'] = true;
+		$number = hash('md5',$title . $result_post_id);
+		$test_return['file'] = wl_generate_certificate($title, $ip, $results_percent, $number, $result_post_id);
+ 		$upload_dir = wp_upload_dir();
+		$content = '<p>Your certificate you can download <a href="'. $upload_dir['baseurl'] .'/pdf_certificate/'.$ip.''.$title.''.$results_percent.$result_post_id.'.pdf">from here</a></p>';
+ 
+		wp_mail( get_option( 'admin_email' ), 'Письмо с вложениями', $content, array(), $attachments );
+		$field_key = 'field_614c3b55ba06e';
+		$valueee = $upload_dir['baseurl'] .'/pdf_certificate/'.$ip.''.$title.''.$results_percent.$result_post_id.'.pdf';
+		update_field($field_key, $valueee, $result_post_id);
+		$field_key = 'field_614c3e83cb56e';
+
+		update_field($field_key, $number, $result_post_id);
 	elseif($results_percent < 80):
 		$test_return['fail'] = true;
 	endif;
@@ -439,7 +493,6 @@ function wl_quizes(){
 	
 	//TODO  если меньше 80%+
 	//TODO redirect to $_GET ?restart+
-
 
 	exit(json_encode($test_return));
 	
